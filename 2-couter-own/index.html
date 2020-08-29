@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+</head>
+
+<body>
+
+
+    <div class="box">
+
+        <h1>Couter</h1>
+        <span class="number">0</span>
+        <div class="button-holder">
+            <button class="btn" data-type="increase">Increase</button>
+            <button class="btn" data-type="reset">Reset</button>
+            <button class="btn" data-type="decrease">Decrease</button>
+        </div>
+    </div>
+
+
+    <script>
+        let number = 0;
+
+        const allButtons = document.querySelectorAll('button');
+        console.log(allButtons);
+        const numberDisplay = document.querySelector('.number')
+
+        function displayNumber() {
+
+
+            console.log(this.dataset.type);
+
+            switch (this.dataset.type) {
+                case 'increase':
+                    number++;
+                    break;
+                case 'decrease':
+                    number--
+                    break;
+                case 'reset':
+                    number = 0;
+                    break;
+                default:
+                    break;
+            }
+
+            console.log(number);
+
+
+            if (number < 0) {
+                numberDisplay.style.color = 'red'
+            }
+            else if (number > 0) {
+                numberDisplay.style.color = 'green'
+            } else {
+                numberDisplay.style.color = 'black';
+            }
+
+            numberDisplay.textContent = number;
+        }
+
+        allButtons.forEach(panel => panel.addEventListener('click', displayNumber));
+
+
+
+
+
+    </script>
+
+</body>
+
+
+
+</html>

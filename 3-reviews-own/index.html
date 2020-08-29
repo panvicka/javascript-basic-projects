@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>reviews</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+
+
+    <div class="flex-container">
+
+
+        <div class="row">
+            <span class="heading">Our Reviews</span>
+            <div class="content">
+                <div class="flex-item">
+                    <span class="avatar"></span>
+                    <span class="name"></span>
+                    <span class="job"></span>
+
+                </div>
+
+
+                <div class="flex-item">
+                    <p class="text"></p>
+                </div>
+
+                <div class="flex-item">
+                    <button class="btn left"><i class="fa fa-chevron-left fa-3x"></i></button>
+                    <button class="btn right"><i class="fa fa-chevron-right fa-3x"></i></button>
+
+
+                </div>
+
+                <div class="flex-item">
+                    <button class="btn suprise">Suprise me</button>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+</body>
+
+
+<script>
+
+    window.onload = fetchAndDisplay(1);
+
+    let shownResponse = 2;
+
+    buttleft = document.querySelector('.left');
+    buttright = document.querySelector('.right');
+    buttsuprise = document.querySelector('.suprise');
+
+    buttsuprise.addEventListener('click', () => {
+       const randm = Math.floor((Math.random() * 20) + 1);
+       fetchAndDisplay(randm);
+        console.log(randm);
+    
+    })
+
+    buttleft.addEventListener('click', () => {
+        if (shownResponse > 2) {
+            shownResponse--;
+        } else {
+            shownResponse = 20;
+        }
+        fetchAndDisplay(shownResponse);
+        console.log(shownResponse);
+    })
+
+
+    buttright.addEventListener('click', () => {
+        if (shownResponse < 20) {
+            shownResponse++;
+        } else {
+            shownResponse = 1;
+        }
+        fetchAndDisplay(shownResponse);
+        console.log(shownResponse);
+    })
+
+    avatarSpan = document.querySelector('.avatar');
+    nameSpan = document.querySelector('.name');
+    workSpan = document.querySelector('.job');
+    textSpan = document.querySelector('.text');
+
+
+    console.log(textSpan);
+
+    function fetchAndDisplay(item) {
+        fetch(`https://5f47adbb95646700168d9b38.mockapi.io/api/reviews/${item}`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data);
+                avatarSpan.innerHTML = `<img src=${data.avatar} class="cropped-image" />`;
+                nameSpan.textContent = `${data.name}`;
+                workSpan.textContent = `${data.job}`;
+                textSpan.textContent = ` ${data.text.repeat(25)}  `;
+
+                textSpan.textContent= textSpan.textContent.substring(0, 150);
+
+
+            });
+
+    }
+
+</script>
+
+
+</html>
